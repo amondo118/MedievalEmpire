@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://2i4aifs3ioxy"]
+
+[ext_resource type="Texture2D" uid="uid://bhpolnngblr1s" path="res://Assets/Camp.png" id="1_ad5gf"]
+
+[node name="Node2D" type="Node2D" unique_id=1496352233]
+
+[node name="Camp" type="Sprite2D" parent="." unique_id=1842656644]
+position = Vector2(8, -16)
+texture = ExtResource("1_ad5gf")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=457824457]
+position = Vector2(10, -11)
+radius = 15.15

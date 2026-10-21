@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ca2vpnuvlw2tk"]
+
+[ext_resource type="Script" uid="uid://bv677ayaxufad" path="res://Scripts/villager_node.gd" id="1_7o0wj"]
+[ext_resource type="Texture2D" uid="uid://c5sa4hx3kq3hv" path="res://Assets/Farmer.png" id="2_0fdfn"]
+[ext_resource type="Texture2D" uid="uid://bms2hfew456lk" path="res://Assets/Farmer2.png" id="3_ysm2t"]
+[ext_resource type="Texture2D" uid="uid://b3x0b0pw85y6g" path="res://Assets/Farmer_0001.png" id="4_aahiq"]
+[ext_resource type="Texture2D" uid="uid://b2bypri0odhcr" path="res://Assets/Farmer_0002.png" id="5_7plda"]
+[ext_resource type="Texture2D" uid="uid://bin6wrvk3gl8r" path="res://Assets/Farmer_0003.png" id="6_6rn28"]
+[ext_resource type="Texture2D" uid="uid://dv4fhujl2vn1w" path="res://Assets/Farmer_0004.png" id="7_kalux"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wli2u"]
+radius = 3.0
+height = 14.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wli2u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0fdfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ysm2t")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aahiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7plda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6rn28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kalux")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 9.0
+}]
+
+[node name="Farmer" type="CharacterBody2D" unique_id=523538425]
+script = ExtResource("1_7o0wj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1184687043]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_wli2u")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=467566585]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1555346290]
+position = Vector2(3, -14)
+sprite_frames = SubResource("SpriteFrames_wli2u")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.6454516

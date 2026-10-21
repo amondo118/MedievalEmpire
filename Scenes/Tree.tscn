@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dnkp0qwyqtp7j"]
+
+[ext_resource type="Texture2D" uid="uid://bqouwn6ai5opd" path="res://Assets/Tree.png" id="1_gtca3"]
+
+[node name="Node2D" type="Node2D" unique_id=1886322220]
+
+[node name="Tree" type="Sprite2D" parent="." unique_id=1922252646]
+position = Vector2(0, -24)
+texture = ExtResource("1_gtca3")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1879021502]
+position = Vector2(-3, 3)
+radius = 0.54
+vertices = PackedVector2Array(-5, -1, -4, 3, 1, 4, 4, 2, 4, -1, -4, -1)
