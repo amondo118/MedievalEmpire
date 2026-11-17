@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="KinData" format=3 uid="uid://c5cja1iwxlrvd"]
+
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="1_ayhur"]
+[ext_resource type="Script" uid="uid://xjj0pim15hgl" path="res://Scripts/Data/kin_data.gd" id="1_ljlvq"]
+[ext_resource type="PackedScene" uid="uid://ca2vpnuvlw2tk" path="res://Scenes/Kin.tscn" id="1_u8xsb"]
+[ext_resource type="Resource" uid="uid://bi6hh631jmirc" path="res://Data/log_res.tres" id="2_m3rfq"]
+
+[resource]
+script = ExtResource("1_ljlvq")
+scene = ExtResource("1_u8xsb")
+inv = Dictionary[ExtResource("1_ayhur"), int]({
+ExtResource("2_m3rfq"): 0
+})
+max_storage = 1
+metadata/_custom_type_script = "uid://xjj0pim15hgl"

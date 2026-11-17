@@ -52,3 +52,10 @@ func _on_resource_changed(res:ResourceType, amount:int):
 			reed.text = String.num_int64(reed.text.to_int()+amount)
 		"firewood":
 			firewood.text = String.num_int64(firewood.text.to_int()+amount)
+
+
+
+var selection : Dictionary = {}
+
+func select_entity(selection):
+	

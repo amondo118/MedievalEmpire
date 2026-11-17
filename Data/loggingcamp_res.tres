@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://lc0mnouheex4"]
+
+[ext_resource type="Script" uid="uid://yppk5l6awcjg" path="res://Scripts/Data/building_data.gd" id="1_dipma"]
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="1_lhd26"]
+[ext_resource type="PackedScene" uid="uid://c1v0lv8y74lu3" path="res://Scenes/LoggingCamp.tscn" id="1_wcpj4"]
+[ext_resource type="Resource" uid="uid://bi6hh631jmirc" path="res://Data/log_res.tres" id="2_lmlwf"]
+
+[resource]
+script = ExtResource("1_dipma")
+scene = ExtResource("1_wcpj4")
+b_name = &"loggingcamp"
+resource = ExtResource("2_lmlwf")
+inv = Dictionary[ExtResource("1_lhd26"), int]({
+ExtResource("2_lmlwf"): 0
+})
+max_storage = 4
+metadata/_custom_type_script = "uid://yppk5l6awcjg"

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="BootstrapData" format=3 uid="uid://uvkvlwv77cme"]
+
+[ext_resource type="Script" uid="uid://b680jqcy1dmo2" path="res://Scripts/Data/bootstrap_data.gd" id="1_mmtq7"]
+
+[resource]
+script = ExtResource("1_mmtq7")
+trees = Array[Vector2]([Vector2(110, 80), Vector2(100, 120), Vector2(-8.425, 105.37)])
+metadata/_custom_type_script = "uid://b680jqcy1dmo2"

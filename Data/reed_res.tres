@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://ddrpbigxh26bj"]
+
+[ext_resource type="Texture2D" uid="uid://bf4402p0ixjmh" path="res://Assets/Icons/Reed_icon.png" id="1_ei0fw"]
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="2_5qvcs"]
+
+[resource]
+script = ExtResource("2_5qvcs")
+id = &"reed"
+display_name = "Reed"
+icon = ExtResource("1_ei0fw")
+metadata/_custom_type_script = "uid://bqb77ygcwsfqw"

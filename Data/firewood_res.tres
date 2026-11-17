@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://c646p1awi288d"]
+
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="1_5iklp"]
+[ext_resource type="Texture2D" uid="uid://mbebcnvbq2wy" path="res://Assets/Icons/Firewood_icon.png" id="1_vptoq"]
+
+[resource]
+script = ExtResource("1_5iklp")
+id = &"firewood"
+display_name = "Firewood"
+icon = ExtResource("1_vptoq")
+metadata/_custom_type_script = "uid://bqb77ygcwsfqw"

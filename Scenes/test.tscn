@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://cvx4uq7w3b753"]
 
 [ext_resource type="Texture2D" uid="uid://da354dba737w7" path="res://Assets/Grass.png" id="1_qc4db"]
-[ext_resource type="Script" uid="uid://da7hf6mqdj16w" path="res://Scripts/villager_manager.gd" id="2_ys1qc"]
-[ext_resource type="Script" uid="uid://4vvnv6amv47u" path="res://Scripts/camera_manager.gd" id="3_35xla"]
-[ext_resource type="PackedScene" uid="uid://ca2vpnuvlw2tk" path="res://Scenes/Villager.tscn" id="3_i3aeo"]
-[ext_resource type="Texture2D" uid="uid://bhpolnngblr1s" path="res://Assets/Camp.png" id="4_5wyu1"]
-[ext_resource type="Texture2D" uid="uid://bqouwn6ai5opd" path="res://Assets/Tree.png" id="6_i3aeo"]
+[ext_resource type="Script" uid="uid://da7hf6mqdj16w" path="res://Scripts/Kin/kin_manager.gd" id="2_ys1qc"]
+[ext_resource type="Script" uid="uid://4vvnv6amv47u" path="res://Scripts/Player/camera.gd" id="3_35xla"]
+[ext_resource type="PackedScene" uid="uid://ca2vpnuvlw2tk" path="res://Scenes/Kin.tscn" id="3_i3aeo"]
+[ext_resource type="PackedScene" uid="uid://2i4aifs3ioxy" path="res://Scenes/Camp.tscn" id="5_5wyu1"]
+[ext_resource type="PackedScene" uid="uid://dnkp0qwyqtp7j" path="res://Scenes/Tree.tscn" id="7_0c07c"]
 [ext_resource type="PackedScene" uid="uid://c1v0lv8y74lu3" path="res://Scenes/LoggingCamp.tscn" id="7_5wyu1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rgh2o"]
@@ -51,10 +51,6 @@ autostart = true
 
 [node name="Farmer" parent="NPC_Manager" unique_id=523538425 instance=ExtResource("3_i3aeo")]
 
-[node name="Camp" type="Sprite2D" parent="NPC_Manager" unique_id=261303289]
-position = Vector2(56, -32)
-texture = ExtResource("4_5wyu1")
-
 [node name="CameraManager" type="Node2D" parent="." unique_id=599417799]
 script = ExtResource("3_35xla")
 
@@ -63,16 +59,14 @@ script = ExtResource("3_35xla")
 [node name="Node2D" type="Node2D" parent="." unique_id=137997137]
 position = Vector2(216, 200)
 
-[node name="Tree" type="Sprite2D" parent="." unique_id=1979266320]
-position = Vector2(120, -40)
-texture = ExtResource("6_i3aeo")
+[node name="Node2D2" parent="." unique_id=1496352233 instance=ExtResource("5_5wyu1")]
+position = Vector2(-122, -93)
 
-[node name="Tree2" type="Sprite2D" parent="." unique_id=1087653567]
-position = Vector2(136, -48)
-texture = ExtResource("6_i3aeo")
+[node name="Node2D3" parent="." unique_id=970335192 instance=ExtResource("7_5wyu1")]
+position = Vector2(-28, -105)
 
-[node name="Node2D2" parent="." unique_id=970335192 instance=ExtResource("7_5wyu1")]
-position = Vector2(-40, -48)
+[node name="Node2D4" parent="." unique_id=1886322220 instance=ExtResource("7_0c07c")]
+position = Vector2(57, -100)
 
 [connection signal="timeout" from="NPC_Manager/Timer" to="NPC_Manager" method="_on_timer_timeout"]
 [connection signal="timeout" from="NPC_Manager/Timer2" to="NPC_Manager" method="_on_timer_2_timeout"]

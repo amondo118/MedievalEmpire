@@ -1,13 +1,32 @@
 [gd_scene format=3 uid="uid://2i4aifs3ioxy"]
 
 [ext_resource type="Texture2D" uid="uid://bhpolnngblr1s" path="res://Assets/Camp.png" id="1_ad5gf"]
+[ext_resource type="Script" uid="uid://dhib7tevp1hb1" path="res://Scripts/Buildings/building_view.gd" id="1_qbk3q"]
 
-[node name="Node2D" type="Node2D" unique_id=1496352233]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ad5gf"]
+size = Vector2(24.5, 58.18643)
+
+[node name="Camp" type="Node2D" unique_id=1496352233 groups=["Buildings"]]
+script = ExtResource("1_qbk3q")
 
 [node name="Camp" type="Sprite2D" parent="." unique_id=1842656644]
-position = Vector2(8, -16)
+position = Vector2(-0.70000076, 19.565002)
 texture = ExtResource("1_ad5gf")
+offset = Vector2(-0.3, -21.565)
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=457824457]
-position = Vector2(10, -11)
-radius = 15.15
+position = Vector2(-2, 5)
+vertices = PackedVector2Array(-15, -2, -10, -9, 6, -9, 11, -9, 16, 1, 13, 8, 6, 12, -1, 5, -13, 6)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1639738395]
+position = Vector2(-0.70000076, -1.4349976)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1154286497]
+position = Vector2(0, 3)
+scale = Vector2(1, 0.5241772)
+shape = SubResource("RectangleShape2D_ad5gf")
+
+[node name="Marker" type="Marker2D" parent="." unique_id=487452528]
+position = Vector2(-5, 14)

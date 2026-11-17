@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ResourceData" format=3 uid="uid://cxt5gglap60b6"]
+
+[ext_resource type="Resource" uid="uid://bi6hh631jmirc" path="res://Data/log_res.tres" id="1_0vk3c"]
+[ext_resource type="Script" uid="uid://b5g7lhhqfcsdu" path="res://Scripts/Data/resource_data.gd" id="1_8hkah"]
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="2_8vh7l"]
+[ext_resource type="PackedScene" uid="uid://dnkp0qwyqtp7j" path="res://Scenes/Tree.tscn" id="2_b1ljr"]
+
+[resource]
+script = ExtResource("1_8hkah")
+ID = &"tree"
+name = "tree"
+scene = ExtResource("2_b1ljr")
+resource = ExtResource("1_0vk3c")
+starting_res = Dictionary[ExtResource("2_8vh7l"), int]({
+ExtResource("1_0vk3c"): 1
+})
+max_storage = 4
+marker_offset = Vector2(0, 1)
+metadata/_custom_type_script = "uid://b5g7lhhqfcsdu"

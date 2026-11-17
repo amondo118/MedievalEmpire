@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/*.uid": true,
+    "**/*.import": true
+  },
+  "godotTools.editorPath.godot4": "/run/user/1000/doc/JDdG2XJdEaHXFEtaCi42mg/godot"
+}

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ResourceType" format=3 uid="uid://bi6hh631jmirc"]
+
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="1_q7srw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q7srw"]
+load_path = "res://.godot/imported/Log_icon.png-9e216ec38ebf621c0bc7d655ab06af89.ctex"
+
+[resource]
+script = ExtResource("1_q7srw")
+id = &"log"
+display_name = "Log"
+icon = SubResource("CompressedTexture2D_q7srw")
+metadata/_custom_type_script = "uid://bqb77ygcwsfqw"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://cq34e63m64n36"]
+
+[ext_resource type="PackedScene" uid="uid://2i4aifs3ioxy" path="res://Scenes/Camp.tscn" id="1_iou0j"]
+[ext_resource type="Script" uid="uid://bqb77ygcwsfqw" path="res://Scripts/Data/resource_type.gd" id="1_lopf3"]
+[ext_resource type="Script" uid="uid://yppk5l6awcjg" path="res://Scripts/Data/building_data.gd" id="1_yarmw"]
+
+[resource]
+script = ExtResource("1_yarmw")
+scene = ExtResource("1_iou0j")
+b_name = &"camp"
+marker_offset = Vector2(-5, 14)
+metadata/_custom_type_script = "uid://yppk5l6awcjg"
