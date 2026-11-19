@@ -2,12 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://da354dba737w7" path="res://Assets/Grass.png" id="1_idj7w"]
 [ext_resource type="Script" uid="uid://bl5c4p75fm4d7" path="res://Scripts/Player/main_manager.gd" id="1_v1gob"]
-[ext_resource type="PackedScene" uid="uid://dpg7mjd70ii6u" path="res://Scenes/UI.tscn" id="2_50glp"]
+[ext_resource type="Script" uid="uid://dwrw5cxfwfgve" path="res://Scripts/Player/UI/ui_controller.gd" id="2_grg3l"]
 [ext_resource type="Script" uid="uid://0n6fl7c4gbke" path="res://Scripts/Player/interaction_controller.gd" id="2_jw32o"]
 [ext_resource type="Script" uid="uid://da7hf6mqdj16w" path="res://Scripts/Kin/kin_manager.gd" id="2_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://b6b07v7q7c3cw" path="res://Assets/Icons/Log_icon.png" id="3_frkhe"]
+[ext_resource type="Texture2D" uid="uid://diaxatveoak8d" path="res://Assets/Icons/Stone_icon.png" id="4_1p5hy"]
 [ext_resource type="Script" uid="uid://c1o0ncxudw5ot" path="res://Scripts/Buildings/building_manager.gd" id="4_pbw6q"]
 [ext_resource type="Script" uid="uid://4vvnv6amv47u" path="res://Scripts/Player/camera.gd" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://bf4402p0ixjmh" path="res://Assets/Icons/Reed_icon.png" id="5_h1m7h"]
+[ext_resource type="Texture2D" uid="uid://mbebcnvbq2wy" path="res://Assets/Icons/Firewood_icon.png" id="6_erwvk"]
 [ext_resource type="Script" uid="uid://c2gdfgcxi663l" path="res://Scripts/ResourceManager/natural_resource_manager.gd" id="6_jw32o"]
+[ext_resource type="Script" uid="uid://8bq8ba538a2" path="res://Scripts/Player/UI/ui_selection_panel.gd" id="7_1p5hy"]
+[ext_resource type="Script" uid="uid://btg6fg1v1uwe3" path="res://Scenes/selection_manager.gd" id="13_frkhe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rgh2o"]
 texture = ExtResource("1_idj7w")
@@ -27,6 +33,21 @@ sources/0 = SubResource("TileSetAtlasSource_rgh2o")
 vertices = PackedVector2Array(374, 566, -342, 566, -342, 26, 374, 26)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 16, -352, 16, -352, 576, 384, 576, 384, 16)])
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jw32o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7vqg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grg3l"]
+content_margin_left = 4.0
+
+[sub_resource type="Theme" id="Theme_grg3l"]
+default_font_size = 11
+Button/font_sizes/font_size = 9
+HBoxContainer/constants/separation = 19
+Label/font_sizes/font_size = 9
+Label/styles/normal = SubResource("StyleBoxEmpty_grg3l")
+OptionButton/font_sizes/font_size = 11
 
 [node name="Main" type="Node2D" unique_id=442098898]
 
@@ -54,7 +75,455 @@ navigation_polygon = SubResource("NavigationPolygon_wli2u")
 
 [node name="Ui" type="CanvasLayer" parent="." unique_id=627182714]
 
-[node name="Root" parent="Ui" unique_id=77352621 instance=ExtResource("2_50glp")]
+[node name="Root" type="Control" parent="Ui" unique_id=77352621]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 2
+script = ExtResource("2_grg3l")
+
+[node name="TopBar" type="PanelContainer" parent="Ui/Root" unique_id=1864159274]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_right = 114.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jw32o")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/TopBar" unique_id=909205653]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Log" type="PanelContainer" parent="Ui/Root/TopBar/HBoxContainer" unique_id=1668311557]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.795, 0.795)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/TopBar/HBoxContainer/Log" unique_id=214186960]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Ui/Root/TopBar/HBoxContainer/Log/VBoxContainer" unique_id=792871802]
+custom_minimum_size = Vector2(0.035, 0)
+layout_mode = 2
+texture = ExtResource("3_frkhe")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Ui/Root/TopBar/HBoxContainer/Log/VBoxContainer" unique_id=1481511217]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stone" type="PanelContainer" parent="Ui/Root/TopBar/HBoxContainer" unique_id=754347159]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.795, 0.795)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/TopBar/HBoxContainer/Stone" unique_id=1640799109]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Ui/Root/TopBar/HBoxContainer/Stone/VBoxContainer" unique_id=265349]
+custom_minimum_size = Vector2(0.035, 0)
+layout_mode = 2
+texture = ExtResource("4_1p5hy")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Ui/Root/TopBar/HBoxContainer/Stone/VBoxContainer" unique_id=239651370]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reed" type="PanelContainer" parent="Ui/Root/TopBar/HBoxContainer" unique_id=251987272]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.795, 0.795)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/TopBar/HBoxContainer/Reed" unique_id=1371123213]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Ui/Root/TopBar/HBoxContainer/Reed/VBoxContainer" unique_id=1230153444]
+custom_minimum_size = Vector2(0.035, 0)
+layout_mode = 2
+texture = ExtResource("5_h1m7h")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Ui/Root/TopBar/HBoxContainer/Reed/VBoxContainer" unique_id=1304508891]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Firewood" type="PanelContainer" parent="Ui/Root/TopBar/HBoxContainer" unique_id=203921142]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.795, 0.795)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/TopBar/HBoxContainer/Firewood" unique_id=631411882]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Ui/Root/TopBar/HBoxContainer/Firewood/VBoxContainer" unique_id=1120092031]
+custom_minimum_size = Vector2(0.035, 0)
+layout_mode = 2
+texture = ExtResource("6_erwvk")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Ui/Root/TopBar/HBoxContainer/Firewood/VBoxContainer" unique_id=954905029]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightBar" type="PanelContainer" parent="Ui/Root" unique_id=1439103057]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -72.5
+offset_bottom = 72.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RightTab" type="TabContainer" parent="Ui/Root/RightBar" unique_id=1667973910]
+layout_mode = 2
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 7
+current_tab = 0
+
+[node name="K" type="ItemList" parent="Ui/Root/RightBar/RightTab" unique_id=801965802]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = -7
+theme_override_constants/line_separation = 7
+theme_override_constants/icon_margin = 0
+theme_override_font_sizes/font_size = 8
+item_count = 1
+icon_scale = 0.3
+item_0/text = "Ember"
+item_0/icon = ExtResource("6_erwvk")
+metadata/_tab_index = 0
+
+[node name="B" type="ItemList" parent="Ui/Root/RightBar/RightTab" unique_id=1014540150]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="J" type="ItemList" parent="Ui/Root/RightBar/RightTab" unique_id=706498161]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="LeftBar" type="PanelContainer" parent="Ui/Root" unique_id=2064111993]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -57.5
+offset_right = 162.0
+offset_bottom = 57.5
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q7vqg")
+
+[node name="Log" type="RichTextLabel" parent="Ui/Root/LeftBar" unique_id=588701332]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(9.22, 0)
+mouse_filter = 2
+theme_override_constants/line_separation = 4
+theme_override_font_sizes/normal_font_size = 6
+fit_content = true
+scroll_active = false
+scroll_following = true
+vertical_alignment = 2
+
+[node name="BotBar" type="PanelContainer" parent="Ui/Root" unique_id=2087521812]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectPanel" type="PanelContainer" parent="Ui/Root" unique_id=1179386517]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -85.0
+offset_right = 215.0
+grow_vertical = 0
+theme = SubResource("Theme_grg3l")
+script = ExtResource("7_1p5hy")
+
+[node name="Kin" type="Control" parent="Ui/Root/SelectPanel" unique_id=1611708]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Kin" unique_id=1314042448]
+layout_mode = 0
+offset_right = 206.0
+offset_bottom = 85.0
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer" unique_id=433358728]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=1094315838]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer" unique_id=440702171]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=1378423577]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=19520451]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="Name1" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1125078996]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Adim"
+
+[node name="PanelContainer4" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=1532150806]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer4" unique_id=1939627047]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer" unique_id=685872958]
+layout_mode = 2
+
+[node name="Home" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer" unique_id=1151412143]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Home:"
+
+[node name="Home1" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer" unique_id=892361272]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Camp"
+
+[node name="PanelContainer5" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=1462473020]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer5" unique_id=878976943]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer" unique_id=2084175188]
+layout_mode = 2
+
+[node name="Work" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/HBoxContainer" unique_id=1500666538]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Job"
+
+[node name="Work1" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/HBoxContainer" unique_id=126713579]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Logingcamp"
+
+[node name="PanelContainer6" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=1098353993]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer6" unique_id=1979134323]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer" unique_id=1256696998]
+layout_mode = 2
+
+[node name="Task" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/HBoxContainer" unique_id=2142472158]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Doing:"
+
+[node name="Task1" type="Label" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/HBoxContainer" unique_id=300627447]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Going to tree"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=353178061]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="Ui/Root/SelectPanel/Kin/MarginContainer/VBoxContainer" unique_id=393727569]
+layout_mode = 2
+
+[node name="Building" type="Control" parent="Ui/Root/SelectPanel" unique_id=1955892367]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building" unique_id=1117649785]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.5
+offset_right = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer" unique_id=1983739099]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=1250866452]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer" unique_id=426725369]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=1548694637]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1485481554]
+custom_minimum_size = Vector2(86.57, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name:"
+
+[node name="Type1" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1994465296]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Camp"
+
+[node name="PanelContainer4" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=382860937]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4" unique_id=6578594]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer" unique_id=235065421]
+layout_mode = 2
+
+[node name="Kin" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer" unique_id=1441127031]
+custom_minimum_size = Vector2(86.57, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Worker/tenants"
+
+[node name="kinCount" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer" unique_id=158520361]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Button" type="Button" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer" unique_id=2010874943]
+layout_mode = 2
+text = "Add"
+
+[node name="PanelContainer5" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=1738185584]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer5" unique_id=1109787758]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer" unique_id=547687288]
+layout_mode = 2
+
+[node name="Work" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/HBoxContainer" unique_id=2060580726]
+custom_minimum_size = Vector2(86.57, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Job"
+
+[node name="Job2" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/HBoxContainer" unique_id=1014090434]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gathering"
+
+[node name="PanelContainer6" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=1417516813]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer6" unique_id=2120292263]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer" unique_id=1701478651]
+layout_mode = 2
+
+[node name="Inv" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/HBoxContainer" unique_id=690236338]
+custom_minimum_size = Vector2(86.57, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory:"
+
+[node name="Inv1" type="Label" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/HBoxContainer" unique_id=1655569254]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "log(0)"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=696781904]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer" unique_id=1243563581]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="Ui/Root/SelectPanel" unique_id=1433231834]
+custom_minimum_size = Vector2(0.315, 15.38)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/h_separation = 3
+
+[node name="Button" type="Button" parent="Ui/Root/SelectPanel/MenuBar" unique_id=1754403051]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.715, 0.525)
+pivot_offset = Vector2(5.53, 7.77)
+theme_override_font_sizes/font_size = 8
+text = "X"
+autowrap_trim_flags = 192
+
+[node name="t" type="Timer" parent="Ui/Root" unique_id=674412004]
+wait_time = 3.0
 
 [node name="Player" type="Node2D" parent="." unique_id=599417799]
 script = ExtResource("4_rgh2o")
@@ -76,6 +545,12 @@ script = ExtResource("4_pbw6q")
 [node name="ResourceLayer" type="Node2D" parent="Managers" unique_id=1483192956]
 script = ExtResource("6_jw32o")
 
+[node name="SelectionManager" type="Node" parent="Managers" unique_id=2071179472]
+script = ExtResource("13_frkhe")
+
+[node name="WorkManager" type="Node" parent="Managers" unique_id=1839866556]
+script = ExtResource("13_frkhe")
+
 [node name="Pointer-TEMP" type="Node2D" parent="." unique_id=137997137]
 position = Vector2(-217, -117)
 
@@ -84,10 +559,13 @@ y_sort_enabled = true
 
 [connection signal="timeout" from="Timers/Timer-TEMP" to="Managers/KinLayer" method="_on_timer_temp_timeout"]
 [connection signal="timeout" from="Timers/Tick" to="Managers" method="_on_tick_timeout"]
+[connection signal="button_down" from="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer/Button" to="Ui/Root/SelectPanel" method="_on_assign_kin_button"]
+[connection signal="button_down" from="Ui/Root/SelectPanel/MenuBar/Button" to="Ui/Root/SelectPanel" method="_on_hide_button_down"]
 [connection signal="assign_kin_to" from="Player/InteractionController" to="Managers" method="_on_interaction_controller_assign_kin_to"]
 [connection signal="build_at" from="Player/InteractionController" to="Managers/BuildingLayer" method="_on_interaction_controller_build_at"]
-[connection signal="building_selected" from="Player/InteractionController" to="Managers" method="_on_interaction_controller_building_selected"]
-[connection signal="building_selected" from="Player/InteractionController" to="Managers/BuildingLayer" method="_on_interaction_controller_building_selected"]
+[connection signal="building_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_building_selected"]
+[connection signal="deselect" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_deselect"]
+[connection signal="kin_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_kin_selected"]
 [connection signal="to_build" from="Player/InteractionController" to="Managers/BuildingLayer" method="_on_interaction_controller_to_build"]
 [connection signal="on_tick" from="Managers" to="Managers/KinLayer" method="_on_managers_on_tick"]
 [connection signal="on_tick" from="Managers" to="Managers/BuildingLayer" method="_on_managers_on_tick"]

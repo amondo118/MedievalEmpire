@@ -4,17 +4,15 @@ const BOOTSTRAP = preload("uid://uvkvlwv77cme")
 @onready var kin_manager: Node = $KinLayer
 @onready var building_manager: Node = $BuildingLayer
 @onready var resource_manager: Node = $ResourceLayer 
-var root: UserInerface 
-@onready var ui: CanvasLayer = $"../Ui"
-const UI = preload("uid://dpg7mjd70ii6u")
+@onready var root: UserInerface = $"../Ui/Root"
+
 
 signal on_tick
 
 
 
 func _ready() -> void:
-	root=UI.instantiate()
-	ui.add_child(root)
+
 	kin_manager.need_work.connect(_on_kin_needs_work)
 	kin_manager.added_kin.connect(root.added_kin)
 	kin_manager.inv_changed.connect(func(r,a):root._on_resource_changed(r,a))
@@ -59,9 +57,3 @@ func _assign_work(kin: KinController):
 
 func _on_building_layer_give_task(building: Variant, kin: Variant) -> void:
 	_assign_work(kin)
-
-func ui_select(entityID:String):
-	root
-
-func _on_interaction_controller_building_selected(target_id: String) -> void:
-	ui_select(target_id)

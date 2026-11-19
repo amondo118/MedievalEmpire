@@ -8,12 +8,8 @@ class_name UserInerface
 @onready var stone: Label = $TopBar/HBoxContainer/Stone/VBoxContainer/Label
 @onready var reed: Label = $TopBar/HBoxContainer/Reed/VBoxContainer/Label
 @onready var firewood: Label = $TopBar/HBoxContainer/Firewood/VBoxContainer/Label
-@onready var selection_panel :Dictionary={
-	"name": $SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Name1,
-	"home": $SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Name1, 
-	"work":$SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/HBoxContainer/Work1,
-	"task":$SelectPanel/Kin/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/HBoxContainer/Task1
-}
+
+
 
 var previous:String
 var counter : int = 1
