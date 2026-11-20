@@ -66,3 +66,6 @@ func stop_walking():
 	set_state(State.idle)
 	velocity = Vector2.ZERO 
 	emit_signal("arrived")
+
+func get_id() -> String:
+	return id

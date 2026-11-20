@@ -1,7 +1,8 @@
 class_name BuildingController
 
-signal changed(controller: BuildingController)
+
 signal give_task(building: Building, kin: KinController)
+signal update(target_id: String)
 
 var model: Building
 var view: BuildingView
@@ -17,7 +18,7 @@ func _init(data: BuildingData, pos: Vector2, world: Node2D,id_num:int) -> void:
 
 func assign_kin(kin: KinController) -> bool:
 	model.add_kin(kin)
-	changed.emit(self)
+	update.emit(id)
 	if model.get_type() == "work":
 		give_task.emit(model, kin)
 		return true
@@ -28,3 +29,7 @@ func on_tick():
 
 func get_name():
 	return model.get_building_type()
+
+func select_info():
+	return {"id":id,"name":model.get_building_name(),"kinLabel":"Workers " if model.get_type()=="work" else "Residents: ",
+	"kinCount":model.assigned_kin.size(),"job":model.jobTitle,"inv":model.inventory.get_inv_string()}

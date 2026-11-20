@@ -2,7 +2,7 @@ class_name KinController
 
 const KIN_RES = preload("uid://c5cja1iwxlrvd")
 
-signal need_work(kin:KinController)
+
 
 var view : CharacterBody2D
 var model : Kin
@@ -14,6 +14,11 @@ var id : String
 
 var currentTask = null
 var idleForTick = 0
+
+
+signal need_work(kin:KinController)
+signal update(kin_id:String)
+
 
 func get_name():
 	return model.name
@@ -53,14 +58,17 @@ func do_task(task:Task):
 			view.go_to(task.target)
 			#print("Going")
 		Task.Type.GET_FROM:
+		
 			model.inventory.get_from(task.target,task.resource,task.amount)
 			#print("Getting",task.amount)
 			currentTask=null
 		Task.Type.DEPOSIT_TO:
+	
 			model.inventory.transfer_to(task.target,task.resource,task.amount)
 			#print("Depositing",task.amount)
 			currentTask=null
-
+	update.emit(id)		
+	
 
 
 func tick():
@@ -77,6 +85,7 @@ func tick():
 			state_change("returning_home")
 			task_queue = [Task.go_to(model.homeMarker)]
 			print("Returning Home")
+			update.emit(id)	
 		else:
 			if currentState != "idle":
 				state_change("idle")
@@ -87,6 +96,7 @@ func tick():
 	currentTask = task_queue.pop_front()
 	do_task(currentTask)
 	
+	
 func assignBuilding(b_:String,type:String,marker:Vector2):
 	match type:
 		"work":
@@ -95,10 +105,11 @@ func assignBuilding(b_:String,type:String,marker:Vector2):
 		"home":
 			model.homeBuilding=b_
 			model.homeMarker=marker
+	update.emit(id)
 
 func select_info():
-	return {"name":model.name,"home":model.homeBuilding,
-	"work":model.workBuilding,"Task":currentTask}
+	return {"id":id,"name":model.name,"home":model.homeBuilding,
+	"work":model.workBuilding,"task":currentTask.get_info() if currentTask!=null else "Idle"}
 
 func get_pos():
 	model.position=view.position

@@ -14,4 +14,5 @@ inv = Dictionary[ExtResource("1_lhd26"), int]({
 ExtResource("2_lmlwf"): 0
 })
 max_storage = 4
+jobTitle = "Gatherer"
 metadata/_custom_type_script = "uid://yppk5l6awcjg"

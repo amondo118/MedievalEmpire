@@ -6,6 +6,7 @@ var inventory : Inventory
 
 
 
+
 func _init(init :Dictionary={},storage_max :int =0,position_:Vector2=Vector2(0.0,0.0),_id : StringName=""):
 	inventory=Inventory.new(init,storage_max)
 	position = position_

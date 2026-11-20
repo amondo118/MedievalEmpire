@@ -1,21 +1,27 @@
 extends Control
-class_name UI
+
 
 @onready var items_menu: TabContainer = $RightBar/RightTab
-@onready var loging: RichTextLabel = $LeftBar/Log
-@onready var t: Timer = $"../t"
+@onready var loging: RichTextLabel =$LeftBar/Log
+@onready var t: Timer = $"t"
 @onready var log: Label = $TopBar/HBoxContainer/Log/VBoxContainer/Label
 @onready var stone: Label = $TopBar/HBoxContainer/Stone/VBoxContainer/Label
 @onready var reed: Label = $TopBar/HBoxContainer/Reed/VBoxContainer/Label
 @onready var firewood: Label = $TopBar/HBoxContainer/Firewood/VBoxContainer/Label
+@onready var select_panel: SelectionPanel = $SelectPanel
+
+
 
 var previous:String
 var counter : int = 1
 
 
+signal assign_kin_to(target_id: String)
+
+
+
 func _ready() -> void:
 	pass
-
 func log_message(to_print : String):
 	if previous ==to_print:
 		counter+=1
@@ -55,7 +61,18 @@ func _on_resource_changed(res:ResourceType, amount:int):
 
 
 
-var selection : Dictionary = {}
+func _on_selected():
+	select_panel.visible = true
 
-func select_entity(selection):
+
+func _on_deselected():
+	select_panel.visible = false
+
+
+func _on_assign_kin_button() -> void:
+	assign_kin_to.emit(select_panel.selected_id)
+
+
+func _on_selection_exit_button_down() -> void:
+	_on_deselected()
 	

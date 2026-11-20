@@ -8,10 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bin6wrvk3gl8r" path="res://Assets/Farmer_0003.png" id="6_6rn28"]
 [ext_resource type="Texture2D" uid="uid://dv4fhujl2vn1w" path="res://Assets/Farmer_0004.png" id="7_kalux"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wli2u"]
-radius = 3.0
-height = 6.0
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_wli2u"]
 animations = [{
 "frames": [{
@@ -43,12 +39,12 @@ animations = [{
 "speed": 9.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wli2u"]
+radius = 4.0
+height = 22.0
+
 [node name="Kin" type="CharacterBody2D" unique_id=523538425 groups=["Kin"]]
 script = ExtResource("1_7o0wj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1184687043]
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_wli2u")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=467566585]
 path_postprocessing = 1
@@ -62,3 +58,7 @@ sprite_frames = SubResource("SpriteFrames_wli2u")
 animation = &"walk"
 autoplay = "idle"
 frame_progress = 0.6454516
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1184687043]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_wli2u")

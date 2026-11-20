@@ -1,8 +1,7 @@
 [gd_scene format=4 uid="uid://o3jcme6bjaeq"]
 
 [ext_resource type="Texture2D" uid="uid://da354dba737w7" path="res://Assets/Grass.png" id="1_idj7w"]
-[ext_resource type="Script" uid="uid://bl5c4p75fm4d7" path="res://Scripts/Player/main_manager.gd" id="1_v1gob"]
-[ext_resource type="Script" uid="uid://dwrw5cxfwfgve" path="res://Scripts/Player/UI/ui_controller.gd" id="2_grg3l"]
+[ext_resource type="Script" uid="uid://be8p0pmvacv17" path="res://Scripts/Player/UI/ui_interface.gd" id="2_1p5hy"]
 [ext_resource type="Script" uid="uid://0n6fl7c4gbke" path="res://Scripts/Player/interaction_controller.gd" id="2_jw32o"]
 [ext_resource type="Script" uid="uid://da7hf6mqdj16w" path="res://Scripts/Kin/kin_manager.gd" id="2_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://b6b07v7q7c3cw" path="res://Assets/Icons/Log_icon.png" id="3_frkhe"]
@@ -13,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://mbebcnvbq2wy" path="res://Assets/Icons/Firewood_icon.png" id="6_erwvk"]
 [ext_resource type="Script" uid="uid://c2gdfgcxi663l" path="res://Scripts/ResourceManager/natural_resource_manager.gd" id="6_jw32o"]
 [ext_resource type="Script" uid="uid://8bq8ba538a2" path="res://Scripts/Player/UI/ui_selection_panel.gd" id="7_1p5hy"]
-[ext_resource type="Script" uid="uid://btg6fg1v1uwe3" path="res://Scenes/selection_manager.gd" id="13_frkhe"]
+[ext_resource type="Script" uid="uid://ckj6m2n6fm54y" path="res://Scripts/Managers/main_manager.gd" id="10_1p5hy"]
+[ext_resource type="Script" uid="uid://bti0uanqjt1dx" path="res://Scripts/Managers/selection_manager.gd" id="14_h1m7h"]
+[ext_resource type="Script" uid="uid://bfpqohv2lr5v5" path="res://Scripts/Managers/work_manager.gd" id="15_h1m7h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rgh2o"]
 texture = ExtResource("1_idj7w")
@@ -85,7 +86,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 mouse_filter = 2
-script = ExtResource("2_grg3l")
+script = ExtResource("2_1p5hy")
 
 [node name="TopBar" type="PanelContainer" parent="Ui/Root" unique_id=1864159274]
 layout_mode = 1
@@ -276,6 +277,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="SelectPanel" type="PanelContainer" parent="Ui/Root" unique_id=1179386517]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -386,6 +388,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Building" type="Control" parent="Ui/Root/SelectPanel" unique_id=1955892367]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Ui/Root/SelectPanel/Building" unique_id=1117649785]
@@ -534,7 +537,7 @@ script = ExtResource("2_jw32o")
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=227897141]
 
 [node name="Managers" type="Node2D" parent="." unique_id=1646543157]
-script = ExtResource("1_v1gob")
+script = ExtResource("10_1p5hy")
 
 [node name="KinLayer" type="Node2D" parent="Managers" unique_id=1986413908]
 script = ExtResource("2_rgh2o")
@@ -546,10 +549,10 @@ script = ExtResource("4_pbw6q")
 script = ExtResource("6_jw32o")
 
 [node name="SelectionManager" type="Node" parent="Managers" unique_id=2071179472]
-script = ExtResource("13_frkhe")
+script = ExtResource("14_h1m7h")
 
 [node name="WorkManager" type="Node" parent="Managers" unique_id=1839866556]
-script = ExtResource("13_frkhe")
+script = ExtResource("15_h1m7h")
 
 [node name="Pointer-TEMP" type="Node2D" parent="." unique_id=137997137]
 position = Vector2(-217, -117)
@@ -559,15 +562,28 @@ y_sort_enabled = true
 
 [connection signal="timeout" from="Timers/Timer-TEMP" to="Managers/KinLayer" method="_on_timer_temp_timeout"]
 [connection signal="timeout" from="Timers/Tick" to="Managers" method="_on_tick_timeout"]
-[connection signal="button_down" from="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer/Button" to="Ui/Root/SelectPanel" method="_on_assign_kin_button"]
-[connection signal="button_down" from="Ui/Root/SelectPanel/MenuBar/Button" to="Ui/Root/SelectPanel" method="_on_hide_button_down"]
-[connection signal="assign_kin_to" from="Player/InteractionController" to="Managers" method="_on_interaction_controller_assign_kin_to"]
+[connection signal="assign_kin_to" from="Ui/Root" to="Managers/WorkManager" method="_on_interaction_controller_assign_kin_to"]
+[connection signal="exit_selection" from="Ui/Root/SelectPanel" to="Ui/Root" method="_on_selection_exit_button_down"]
+[connection signal="exit_selection" from="Ui/Root/SelectPanel" to="Managers/SelectionManager" method="_on_exit_selection"]
+[connection signal="button_down" from="Ui/Root/SelectPanel/Building/MarginContainer/VBoxContainer/PanelContainer4/MarginContainer/HBoxContainer/Button" to="Ui/Root" method="_on_assign_kin_button"]
+[connection signal="button_down" from="Ui/Root/SelectPanel/MenuBar/Button" to="Ui/Root/SelectPanel" method="_on_button_button_down"]
 [connection signal="build_at" from="Player/InteractionController" to="Managers/BuildingLayer" method="_on_interaction_controller_build_at"]
-[connection signal="building_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_building_selected"]
-[connection signal="deselect" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_deselect"]
-[connection signal="kin_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_interaction_controller_kin_selected"]
+[connection signal="building_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_building_selected"]
+[connection signal="deselect" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_deselect"]
+[connection signal="kin_selected" from="Player/InteractionController" to="Managers/SelectionManager" method="_on_kin_selected"]
 [connection signal="to_build" from="Player/InteractionController" to="Managers/BuildingLayer" method="_on_interaction_controller_to_build"]
 [connection signal="on_tick" from="Managers" to="Managers/KinLayer" method="_on_managers_on_tick"]
 [connection signal="on_tick" from="Managers" to="Managers/BuildingLayer" method="_on_managers_on_tick"]
 [connection signal="on_tick" from="Managers" to="Managers/ResourceLayer" method="_on_managers_on_tick"]
-[connection signal="give_task" from="Managers/BuildingLayer" to="Managers" method="_on_building_layer_give_task"]
+[connection signal="added_kin" from="Managers/KinLayer" to="Ui/Root" method="added_kin"]
+[connection signal="inv_changed" from="Managers/KinLayer" to="Ui/Root" method="_on_resource_changed"]
+[connection signal="kin_update" from="Managers/KinLayer" to="Managers/SelectionManager" method="_on_kin_update"]
+[connection signal="need_work" from="Managers/KinLayer" to="Managers/WorkManager" method="_assign_work"]
+[connection signal="added_building" from="Managers/BuildingLayer" to="Ui/Root" method="added_building"]
+[connection signal="building_update" from="Managers/BuildingLayer" to="Managers/SelectionManager" method="_on_building_update"]
+[connection signal="give_task" from="Managers/BuildingLayer" to="Managers/WorkManager" method="_on_building_layer_give_task"]
+[connection signal="inv_changed" from="Managers/BuildingLayer" to="Ui/Root" method="_on_resource_changed"]
+[connection signal="deselected" from="Managers/SelectionManager" to="Ui/Root" method="_on_deselected"]
+[connection signal="select" from="Managers/SelectionManager" to="Ui/Root/SelectPanel" method="update_info"]
+[connection signal="selected" from="Managers/SelectionManager" to="Ui/Root" method="_on_selected"]
+[connection signal="update" from="Managers/SelectionManager" to="Ui/Root/SelectPanel" method="update_info"]

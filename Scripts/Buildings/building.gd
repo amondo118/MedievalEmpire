@@ -6,11 +6,13 @@ var buildingType: StringName
 var assigned_kin: Array[KinController] = []
 var data: BuildingData
 var marker: Vector2
+var jobTitle: String
 
 func _init(building_data: BuildingData, position_: Vector2 = Vector2.ZERO,_id:StringName=""):
 	super(building_data.inv.duplicate(),building_data.max_storage,position_,_id)
 	data = building_data
 	buildingType = building_data.b_name
+	jobTitle = building_data.jobTitle
 	position = position_
 	marker = position_ + data.marker_offset
 	match buildingType:
@@ -38,3 +40,9 @@ func gather(target: NaturalResource) -> Array[Task]:
 	]
 	return task_queue
 	
+
+func get_inv_string() -> String:
+	return inventory.get_inv_string()
+
+func get_building_name() -> String:
+	return data.b_name

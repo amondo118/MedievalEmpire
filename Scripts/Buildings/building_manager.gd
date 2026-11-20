@@ -1,4 +1,4 @@
-extends Manager
+extends Node2D
 
 const CAMP_RES = preload("uid://cq34e63m64n36")
 const LOGGINGCAMP_RES = preload("uid://lc0mnouheex4")
@@ -13,6 +13,8 @@ signal give_task(building: Building, kin: KinController)
 signal added_building(controller: BuildingController)
 signal inv_changed(res:ResourceType,amount:int)
 
+signal building_update(target_id: String)
+
 # --- like KinManager: bootstrap / add / tick ---
 func load_bootstrap(b: Resource) -> void:
 	add_building(CAMP_RES, b.camp_pos)
@@ -20,9 +22,11 @@ func load_bootstrap(b: Resource) -> void:
 func add_building(res: BuildingData, pos: Vector2) -> BuildingController:
 	var c := BuildingController.new(res, pos, world,controllers.size())
 	c.give_task.connect(func(b, k): give_task.emit(b, k))
+	c.update.connect(func(bid): building_update.emit(bid))
 	controllers.append(c)
 	added_building.emit(c)
-	c.model.inventory.changed.connect(func(r,a): inv_changed.emit(r,a))
+	c.model.inventory.changed.connect(func(r,a): inv_changed.emit(r,a); building_update.emit(c.id))
+
 	return c
 
 func on_tick() -> void:
@@ -50,6 +54,7 @@ func get_view(bid:StringName) -> Node2D:
 
 func assign_kin(bid:StringName, kin: KinController) -> bool:
 	get_controller(bid).assign_kin(kin)
+
 	return false
 
 # --- build mode (signals from InteractionController) ---
@@ -60,3 +65,15 @@ func _on_interaction_controller_build_at(pos: Vector2) -> void:
 	if to_build != null:
 		add_building(to_build, pos)
 		to_build = null
+
+func get_building_info(bid:StringName):
+	var c = get_controller(bid)
+	if c != null:
+		return c.select_info()
+	return null
+
+func get_building_name(bid:StringName):
+	var c = get_controller(bid)
+	if c != null:
+		return c.get_name()
+	return ""

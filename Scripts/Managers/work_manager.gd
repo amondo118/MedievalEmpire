@@ -1,32 +1,9 @@
 extends Node
-class_name MainManager
-const BOOTSTRAP = preload("uid://uvkvlwv77cme")
-@onready var kin_manager: Node = $KinLayer
-@onready var building_manager: Node = $BuildingLayer
-@onready var resource_manager: Node = $ResourceLayer 
-@onready var root: UserInerface = $"../Ui/Root"
-
-
-signal on_tick
-
-
-
-func _ready() -> void:
-
-	kin_manager.need_work.connect(_on_kin_needs_work)
-	kin_manager.added_kin.connect(root.added_kin)
-	kin_manager.inv_changed.connect(func(r,a):root._on_resource_changed(r,a))
-	building_manager.added_building.connect(root.added_building)
-	building_manager.inv_changed.connect(func(r,a):root._on_resource_changed(r,a))
-	
-	load_bootstrap(BOOTSTRAP)
-	
-	
-func load_bootstrap(b:Resource):
-	kin_manager.load_bootstrap(b)
-	building_manager.load_bootstrap(b)
-	resource_manager.load_bootstrap(b)
-
+@onready var root: Control = $"../../Ui/Root"
+@onready var kin_manager: Node2D = $"../KinLayer"
+@onready var building_manager: Node2D = $"../BuildingLayer"
+@onready var resource_manager: Node2D = $"../ResourceLayer"
+@onready var selection_manager: Node = $"../SelectionManager"
 
 func _on_interaction_controller_assign_kin_to(target: String) -> void:
 	var b :Building = building_manager.get_model(target)
@@ -41,9 +18,7 @@ func _on_interaction_controller_assign_kin_to(target: String) -> void:
 	
 func _on_kin_needs_work(kin:KinController):
 	_assign_work(kin)
-	
-func _on_tick_timeout() -> void:
-	on_tick.emit()
+
 
 func _assign_work(kin: KinController):
 	var b: Building = building_manager.get_model(kin.model.workBuilding)
@@ -51,7 +26,6 @@ func _assign_work(kin: KinController):
 		return
 	var tree = resource_manager.get_nearest(b.marker)
 	if tree == null:
-		kin.model.workBuilding = ""
 		return
 	kin.work_queue(b.gather(tree))
 

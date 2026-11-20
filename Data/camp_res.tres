@@ -9,4 +9,5 @@ script = ExtResource("1_yarmw")
 scene = ExtResource("1_iou0j")
 b_name = &"camp"
 marker_offset = Vector2(-5, 14)
+jobTitle = "Rest"
 metadata/_custom_type_script = "uid://yppk5l6awcjg"

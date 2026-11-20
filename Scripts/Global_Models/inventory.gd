@@ -62,3 +62,9 @@ func get_from(other:Inventory,type :ResourceType, quantity:int)->bool:
 		return true
 	prints(other.has(type,quantity) , can_add(quantity))
 	return false
+
+func get_inv_string() -> String:
+	var s:String=""
+	for res in resources:
+		s+=res.display_name+": "+String.num_int64(resources[res])+" / "+String.num_int64(max_storage)+"\t"
+	return s

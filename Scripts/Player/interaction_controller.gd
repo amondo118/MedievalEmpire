@@ -7,11 +7,13 @@ var build := false
 var mouse_query := PhysicsPointQueryParameters2D.new()
 
 signal building_selected(target_id: String)
-signal assign_kin_to(target_id: String)
-signal to_build(b: int)
-signal build_at(pos: Vector2)
 signal kin_selected(target_id: String)
 signal deselect
+
+
+signal to_build(b: int)
+signal build_at(pos: Vector2)
+
 
 const PICK_PRIORITY: Array[String] = ["Kin", "Buildings", "Resources", "Animals", "Ground"]
 
@@ -26,9 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if select() == "" and build:
 				build_at.emit(get_global_mouse_position())
 				build = false
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			if selected_building != "" and get_id(pick_under_mouse()) == selected_building:
-				assign_kin_to.emit(selected_building)
+
 
 	if event.is_action_pressed("building_0"):
 		toggle_build(1)
